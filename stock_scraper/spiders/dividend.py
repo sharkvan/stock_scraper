@@ -5,10 +5,11 @@ from stock_scraper.items import Stock, StockLoader
 class DividendSpider(scrapy.Spider):
     name = "dividend"
     allowed_domains = ["nasdaq.com"]
-    qrtMth = [1,2,3,1,2,3,1,2,3,1,2,3]
-
+    
     def __init__(self, category=None, *args, **kwargs):
         super(DividendSpider, self).__init__(*args, **kwargs)
+        self.qtrMth = lambda: None
+        setattr(self, 'qtrMth', [1,2,3,1,2,3,1,2,3,1,2,3])
 
     def start_requests(self):
         yield scrapy.Request(url='http://www.nasdaq.com/symbol/' + self.symbol + '/dividend-history')
@@ -32,7 +33,7 @@ class DividendSpider(scrapy.Spider):
                 stock['dividendAmount'] = record.css('td span::text')[1].extract()
                 #Payment Date
                 stock['dividendPayDate'] = payDate
-                stock['dividendPayQtrMonth'] = qtrMth[payDate.month]
+                stock['dividendPayQtrMonth'] = self.qtrMth[payDate.month-1]
                 break
 
         payDates = []
@@ -44,7 +45,7 @@ class DividendSpider(scrapy.Spider):
                     break
 
         delta = (payDates[0] - payDates[1]).days
-        if (payDates[0] - datetime.datetime.now()).days > 100 :
+        if (payDates[0] - datetime.now()).days > 100 :
             stock['dividendFrequency'] = 'STP'
         elif delta < 50 :
             stock['dividendFrequency'] = 'MTH'
