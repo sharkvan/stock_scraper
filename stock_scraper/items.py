@@ -4,14 +4,14 @@ import json
 
 class StockLoader():
     def load(self, filePath):
-        if os.path.isfile(filePath):
+        try: 
             file = open(filePath, 'r')
             jsonData = json.load(file)
             file.close()
             stock = Stock(jsonData[0])
                 
             return stock
-        else:
+        except:
             return Stock()
 
 class Stock(scrapy.Item):
