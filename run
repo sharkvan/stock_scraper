@@ -1,0 +1,1 @@
+docker run --rm -v /Users/schruben/GitHub/tschruben/stock-scraper/stock_scraper:/stock_scraper -w /stock_scraper trcook/docker-scrapy crawl divHistory
