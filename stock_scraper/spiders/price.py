@@ -12,7 +12,7 @@ class PriceSpider(scrapy.Spider):
     def parse(self, response):
         stockLoader = StockLoader()
         stock = stockLoader.load(self.filePath) 
-        stockFile['symbol'] = self.symbol
-        stockFile['price'] = response.css('#qwidget_lastsale::text').extract_first().strip('$')
+        stock['symbol'] = self.symbol
+        stock['price'] = response.css('#qwidget_lastsale::text').extract_first().strip('$')
 
-        return stockFile
+        return stock
