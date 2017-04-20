@@ -2,29 +2,41 @@ import scrapy
 import os.path
 import json
 
-class StockLoader():
-    def load(self, filePath):
-        try: 
-            file = open(filePath, 'r')
-            jsonData = json.load(file)
-            file.close()
-            stock = Stock(jsonData[0])
-                
-            return stock
-        except:
-            return Stock()
+class Price(scrapy.Item):
+    symbol = scrapy.Field()
+    price = scrapy.Field()
+    change = scrapy.Field()
 
-class Stock(scrapy.Item):
+class Profile(scrapy.Item):
     symbol = scrapy.Field()
     symbolName = scrapy.Field()
-    eps = scrapy.Field()
-    dividendYield = scrapy.Field()
-    dividendFrequency = scrapy.Field()
-    dividendAmount = scrapy.Field()
-    dividendExDate = scrapy.Field()
-    dividendPayDate = scrapy.Field()
-    dividendPayQtrMonth = scrapy.Field()
-    price = scrapy.Field()
     industry = scrapy.Field()
     sector = scrapy.Field()
+    eps = scrapy.Field()
+
+class Dividend(scrapy.Item):
+    symbol = scrapy.Field()
+    price = scrapy.Field()
+    divYield = scrapy.Field()
+    frequency = scrapy.Field()
+    amount = scrapy.Field()
+    annualAmount = scrapy.Field()
+    exDate = scrapy.Field()
+    payDate = scrapy.Field()
+    payQtrMonth = scrapy.Field()
     
+class Stock(scrapy.Item):
+    symbol = scrapy.Field()
+    price = scrapy.Field()
+    change = scrapy.Field()
+    symbolName = scrapy.Field()
+    industry = scrapy.Field()
+    sector = scrapy.Field()
+    eps = scrapy.Field()
+    divYield = scrapy.Field()
+    frequency = scrapy.Field()
+    amount = scrapy.Field()
+    annualAmount = scrapy.Field()
+    exDate = scrapy.Field()
+    payDate = scrapy.Field()
+    payQtrMonth = scrapy.Field()

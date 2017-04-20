@@ -1,1 +1,1 @@
-docker run --rm -v /Users/schruben/GitHub/tschruben/stock-scraper/stock_scraper:/stock_scraper -w /stock_scraper trcook/docker-scrapy crawl divHistory
+docker run --rm -v /home/tim/projects/stock_scraper:/stock-scraper -w /stock-scraper trcook/docker-scrapy crawl price -a folder=/stock-scraper/results -a symbol='/stock-scraper/symbols'

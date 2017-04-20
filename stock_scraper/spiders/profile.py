@@ -1,6 +1,7 @@
 import scrapy
 import json
-from stock_scraper.items import Stock, StockLoader
+from stock_scraper.items import Profile
+from decimal import Decimal
 
 class ProfileSpider(scrapy.Spider):
     name = 'profile'
@@ -13,20 +14,26 @@ class ProfileSpider(scrapy.Spider):
         }
 
     def start_requests(self):
-        yield scrapy.Request(url='https://core-api.barchart.com/v1/quotes/get?fields=symbol%2CsymbolName%2Csectors%2CmarketCap%2CpeRatioTrailing%2CearningsPerShare%2CannualNetIncome%2Cbeta%2CdividendRate%2CdividendYield&method=%2Fquotes%2Fget&raw=1&symbols=' + self.symbol,
-                                     headers=self.DEFAULT_REQUEST_HEADERS )
+        with open(self.symbol, 'r') as symbols:
+            for symbol in symbols:
+                symbol = symbol.strip()
+                if not symbol: continue
+                yield scrapy.Request(url = 'https://core-api.barchart.com/v1/quotes/get?fields=symbol%2CsymbolName%2Csectors%2Ceps&symbols=' + symbol,
+                                         meta = {'symbol': symbol},
+                                         headers = self.DEFAULT_REQUEST_HEADERS )
 
     def parse(self, response):
         jsonResponse = json.loads(response.body_as_unicode())
     
         symbolData = jsonResponse['data'][0] 
 
-        stockLoader = StockLoader()
-        stock = stockLoader.load(self.filePath) 
+        stock = Profile() 
 
-        stock['symbol'] = self.symbol
+        stock['symbol'] = response.meta['symbol']
         stock['symbolName'] = symbolData['symbolName']
-        stock['eps'] = symbolData['earningsPerShare']
-        stock['dividendYield'] = symbolData['dividendYield']
+        stock['eps'] = Decimal(symbolData['eps'])
+        if len(symbolData['sectors']) > 0:
+            stock['industry'] = symbolData['sectors'][1]['description']
+            stock['sector'] = symbolData['sectors'][0]['description']
 
         return stock

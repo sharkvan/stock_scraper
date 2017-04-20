@@ -1,0 +1,1 @@
+curl 'echo http://www.nasdaq.com/symbol/gnmx/historical' -H 'Content-Type: application/json' --data-binary '1m|false|GNMX'
