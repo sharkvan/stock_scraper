@@ -31,7 +31,11 @@ class ProfileSpider(scrapy.Spider):
 
         stock['symbol'] = response.meta['symbol']
         stock['symbolName'] = symbolData['symbolName']
-        stock['eps'] = Decimal(symbolData['eps'])
+        try:
+            stock['eps'] = Decimal(symbolData['eps'])
+        except:
+            stock['eps'] = Decimal(0)
+
         if len(symbolData['sectors']) > 0:
             stock['industry'] = symbolData['sectors'][1]['description']
             stock['sector'] = symbolData['sectors'][0]['description']

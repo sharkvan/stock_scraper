@@ -25,7 +25,14 @@ class PriceSpider(scrapy.Spider):
     def parse(self, response):
         stock = Price() 
         stock['symbol'] = response.meta['symbol']
-        stock['price'] = Decimal(response.css('#qwidget_lastsale::text').extract_first().strip('$'))
-        stock['change'] = Decimal(response.css('#qwidget_netchange::text').extract_first())
-        
+        try:
+            stock['price'] = Decimal(response.css('#qwidget_lastsale::text').extract_first().strip('$'))
+        except:
+            stock['price'] = Decimal(0)
+
+        try:
+            stock['change'] = Decimal(response.css('#qwidget_netchange::text').extract_first())
+        except:
+            stock['change'] = Decimal(0)
+
         return stock

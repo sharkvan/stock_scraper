@@ -93,7 +93,11 @@ class PayQtrPipeline(object):
     def process_item(self, item, spider):
 
         if item['payDate']:
-            payDate = datetime.strptime(item['payDate'], '%Y-%m-%dT%H:%M:%S')
+            if item['payDate'] is str:
+                payDate = datetime.strptime(item['payDate'], '%Y-%m-%dT%H:%M:%S')
+            else:
+                payDate = item['payDate']
+
             item['payQtrMonth'] = self.qtrMth[payDate.month-1]
 
         return item
