@@ -92,8 +92,9 @@ class PayQtrPipeline(object):
 
     def process_item(self, item, spider):
 
+        spider.log(type(item['payDate']))
         if item['payDate']:
-            if item['payDate'] is not datetime :                
+            if not type(item['payDate']) is datetime :                
                 payDate = datetime.strptime(item['payDate'], '%Y-%m-%dT%H:%M:%S')
             else:
                 payDate = item['payDate']
