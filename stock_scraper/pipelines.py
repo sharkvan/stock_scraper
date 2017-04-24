@@ -93,7 +93,7 @@ class PayQtrPipeline(object):
     def process_item(self, item, spider):
 
         if item['payDate']:
-            if item['payDate'] is str:
+            if item['payDate'] is str or item['payDate'] is unicode :
                 payDate = datetime.strptime(item['payDate'], '%Y-%m-%dT%H:%M:%S')
             else:
                 payDate = item['payDate']
