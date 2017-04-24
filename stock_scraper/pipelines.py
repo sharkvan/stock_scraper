@@ -108,7 +108,7 @@ class JsonWriterPipeline(object):
         path = getStockFilePath(item, spider)
         spider.log('write item to ' + path)
         line = json.dumps(dict(item), default=json_serial, ensure_ascii=True).encode('utf8') + "\n"
-        self.file = open(path, 'wb', encoding='utf8')
+        self.file = open(path, 'w')
         self.file.write(line)
         self.file.close()
         
