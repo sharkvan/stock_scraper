@@ -107,8 +107,8 @@ class JsonWriterPipeline(object):
     def process_item(self, item, spider):
         path = getStockFilePath(item, spider)
         spider.log('write item to ' + path)
-        line = json.dumps(dict(item), default=json_serial) + "\n"
-        self.file = open(path, 'wb')
+        line = json.dumps(dict(item), default=json_serial, ensure_ascii=True).encode('utf8') + "\n"
+        self.file = open(path, 'wb', encoding='utf8')
         self.file.write(line)
         self.file.close()
         
