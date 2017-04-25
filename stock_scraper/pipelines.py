@@ -8,7 +8,7 @@ import os.path
 from scrapy import signals
 from datetime import datetime
 from decimal import Decimal
-from stock_scraper.items import Stock, Price, Profile, Dividend
+from stock_scraper.items import CsvStock, Stock, Price, Profile, Dividend
 from scrapy.exporters import CsvItemExporter
 
 def json_serial(obj):
