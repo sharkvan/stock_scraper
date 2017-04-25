@@ -2,6 +2,14 @@ import scrapy
 import os.path
 import json
 
+def friendly_date(obj):
+
+    if isinstance(obj, datetime):
+        serial = obj.date().isoformat()
+        return serial
+
+    return str(obj)
+
 class Price(scrapy.Item):
     symbol = scrapy.Field()
     price = scrapy.Field()
@@ -40,3 +48,7 @@ class Stock(scrapy.Item):
     exDate = scrapy.Field()
     payDate = scrapy.Field()
     payQtrMonth = scrapy.Field()
+
+class CsvStock(Stock):
+    exDate = scrapy.Field(Stock.fields['exDate'], serializer=friendly_date)
+    payDate = scrapy.Field(Stock.fields['payDate'], serializer=friendly_date)

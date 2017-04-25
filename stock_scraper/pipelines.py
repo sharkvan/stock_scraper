@@ -127,15 +127,15 @@ class SecuritiesPipeline(object):
 
     def process_item(self, item, spider):
         if item['symbol'] in self.items:
-            self.items[item['symbol']].update(item)
+            self.items[item['symbol']].update(CsvStock(item))
         else:
-            self.items[item['symbol']] = item
+            self.items[item['symbol']] = CsvStock(item)
 
         return item
 
     def spider_closed(self, spider):
         file = getSecuritiesFile(spider)
-        exporter = CsvItemExporter(file, fields_to_export=('symbol', 'symbolName', 'industry', 'sector', 'frequency', 'eps', 'price', 'divYield', 'exDate', 'amount', 'payDate', 'payQtrMonth', 'change'))
+        exporter = CsvItemExporter(file, encoding='utf8', fields_to_export=('symbol', 'symbolName', 'industry', 'sector', 'frequency', 'eps', 'price', 'divYield', 'exDate', 'amount', 'payDate', 'payQtrMonth', 'change'))
         exporter.start_exporting()
 
         for stock in self.items.itervalues() :
