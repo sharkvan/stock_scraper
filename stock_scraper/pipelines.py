@@ -79,9 +79,9 @@ class LoadStockPipeline(object):
 
 class PricePipeline(object):
     def process_item(self, item, spider):
-        if 'amount' in item :
-            if item['amount'] and item['price'] :
-                item['divYield'] = Decimal(item['amount']) / Decimal(item['price'])
+        if 'annualAmount' in item :
+            if item['annualAmount'] and item['price'] :
+                item['divYield'] = Decimal(item['annualAmount']) / Decimal(item['price'])
 
         return item
 
