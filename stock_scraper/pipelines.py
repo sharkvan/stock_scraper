@@ -8,14 +8,14 @@ import os.path
 from scrapy import signals
 from datetime import datetime
 from decimal import Decimal
-from stock_scraper.items import CsvStock, Stock, Price, Profile, Dividend
+from stock_scraper.items import Stock, Price, Profile, Dividend
 from scrapy.exporters import CsvItemExporter
 
 def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""
 
     if isinstance(obj, datetime):
-        serial = obj.isoformat()
+        serial = obj.date().isoformat()
         return serial
 
     if isinstance(obj, Decimal):
@@ -129,7 +129,7 @@ class SecuritiesPipeline(object):
         if item['symbol'] in self.items:
             self.items[item['symbol']].update(item)
         else:
-            self.items[item['symbol']] = CsvStock(item)
+            self.items[item['symbol']] = item
 
         return item
 
