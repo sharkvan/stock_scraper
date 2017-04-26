@@ -50,6 +50,3 @@ class Stock(scrapy.Item):
     payDate = scrapy.Field()
     payQtrMonth = scrapy.Field()
 
-class CsvStock(Stock):
-    exDate = scrapy.Field(Stock.fields['exDate'], serializer=friendly_date)
-    payDate = scrapy.Field(Stock.fields['payDate'], serializer=friendly_date)

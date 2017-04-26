@@ -36,8 +36,8 @@ class DividendSpider(scrapy.Spider):
             if record.css('td span::text') :
                 try:
                     dividend = Dividend() 
-                    dividend['exDate'] = datetime.strptime(record.css('td span::text')[0].extract(), '%m/%d/%Y')
-                    dividend['payDate'] = datetime.strptime(record.css('td span::text')[4].extract(), '%m/%d/%Y')
+                    dividend['exDate'] = datetime.strptime(record.css('td span::text')[0].extract(), '%m/%d/%Y').date()
+                    dividend['payDate'] = datetime.strptime(record.css('td span::text')[4].extract(), '%m/%d/%Y').date()
                     dividend['amount'] = Decimal(record.css('td span::text')[1].extract())
 
                     payDates.append(dividend)
