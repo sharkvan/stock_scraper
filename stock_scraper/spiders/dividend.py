@@ -36,7 +36,7 @@ class DividendSpider(scrapy.Spider):
             if record.css('td span::text') :
                 try:
                     dividend = Dividend() 
-                    dividend['exDate'] = datetime.strptime(record.css('td span::text')[0].extract(), '%m/%d/%Y').date()
+                    dividend['exDate'] = datetime.strptime(record.css('td span::text')[0].extract(), '%m/%d/%Y').date().isoformat()
                     dividend['payDate'] = datetime.strptime(record.css('td span::text')[4].extract(), '%m/%d/%Y').date()
                     dividend['amount'] = Decimal(record.css('td span::text')[1].extract())
 
@@ -87,6 +87,7 @@ class DividendSpider(scrapy.Spider):
                     item['frequency'] = 'IR'
                     item['annualAmount'] = 0
 
+            item['payDate'] = item['payDate'].isoformat()
             return item
         except:
             return None 
