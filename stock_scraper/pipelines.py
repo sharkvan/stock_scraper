@@ -127,7 +127,7 @@ class SecuritiesPipeline(object):
 
     def process_item(self, item, spider):
         if item['symbol'] in self.items:
-            self.items[item['symbol']].update(CsvStock(item))
+            self.items[item['symbol']].update(item)
         else:
             self.items[item['symbol']] = CsvStock(item)
 
