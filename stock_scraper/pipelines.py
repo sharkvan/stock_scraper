@@ -126,7 +126,7 @@ class SecuritiesPipeline(object):
         if item['symbol'] in self.items:
             self.items[item['symbol']].update(item)
         else:
-            self.items[item['symbol']] = item
+            self.items[item['symbol']] = Stock(item)
 
         return item
 
