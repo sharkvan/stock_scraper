@@ -136,6 +136,8 @@ class SecuritiesPipeline(object):
         exporter.start_exporting()
 
         for stock in self.items.itervalues() :
+            stock['exDate'] = stock['exDate'].date().isoformat()
+            stock['payDate'] = stock['payDate'].date().isoformat()
             exporter.export_item(stock)
 
         exporter.finish_exporting()
