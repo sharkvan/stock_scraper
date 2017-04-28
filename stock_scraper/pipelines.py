@@ -18,10 +18,7 @@ def json_serial(obj):
         serial = obj.strftime("%Y-%m-%d")
         return serial
 
-    if isinstance(obj, Decimal):
-        return str(obj)
-        
-    raise TypeError ("Could not serialize type: " + type(obj).__name__ )
+    return str(obj)
 
 def getStockFilePath(item, spider):
     path = os.path.join(spider.folder, item['symbol'].lower() + ".json")

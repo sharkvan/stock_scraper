@@ -30,8 +30,8 @@ class Dividend(scrapy.Item):
     frequency = scrapy.Field()
     amount = scrapy.Field()
     annualAmount = scrapy.Field()
-    exDate = scrapy.Field()
-    payDate = scrapy.Field()
+    exDate = scrapy.Field(serializer=friendly_date)
+    payDate = scrapy.Field(serializer=friendly_date)
     payQtrMonth = scrapy.Field()
     
 class Stock(scrapy.Item):
@@ -46,7 +46,7 @@ class Stock(scrapy.Item):
     frequency = scrapy.Field()
     amount = scrapy.Field()
     annualAmount = scrapy.Field()
-    exDate = scrapy.Field()
-    payDate = scrapy.Field()
+    exDate = scrapy.Field(serializer=friendly_date)
+    payDate = scrapy.Field(serializer=friendly_date)
     payQtrMonth = scrapy.Field()
 
