@@ -92,7 +92,7 @@ class PayQtrPipeline(object):
         spider.log(type(item['payDate']))
         if item['payDate']:
             if not type(item['payDate']) is datetime :                
-                payDate = datetime.strptime(item['payDate'], '%Y-%m-%dT%H:%M:%S')
+                payDate = datetime.strptime(item['payDate'], '%Y-%m-%d')
             else:
                 payDate = item['payDate']
 
