@@ -63,7 +63,7 @@ class DividendSpider(scrapy.Spider):
             if exDate <= today :
                 break
 
-            if self.getCalendarQuarter(exDate) == self.getCalendarQuarter(today) :
+            if self.getCalendarQuarter(exDate) == self.getCalendarQuarter(today.date()) :
                 break
 
             nextDivIndex += 1
