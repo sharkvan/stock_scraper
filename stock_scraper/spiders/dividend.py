@@ -23,7 +23,10 @@ class DividendSpider(scrapy.Spider):
                                         'Referer': 'https://www.nasdaq.com/',
                                         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36',
                                     })
-    
+   
+    def getCalendarQuarter(date) :
+        return (date.month // 3) + 1
+
     def parse(self, response):
         
         price = Decimal(response.css('#qwidget_lastsale::text').extract_first().strip('$'))
@@ -56,8 +59,12 @@ class DividendSpider(scrapy.Spider):
         # 4. This should help to lower larger jumps in yields dues to abnormal monthly payments.
         nextDivIndex = 0
         for dividend in payDates:
-            if dividend['exDate'] < today:
+            if dividend['exDate'] <= today :
                 break
+
+            if self.getCalendarQuarter(dividend['exDate'].date()) == self.getCalendarQuarter(today) :
+                break
+
             nextDivIndex += 1
 
         try:
@@ -66,7 +73,7 @@ class DividendSpider(scrapy.Spider):
             item['symbol'] = response.meta['symbol']
             item['price'] = price
         
-            if (item['payDate'] - today).days > 100 :
+            if (today - item['payDate']).days > 100 :
                 item['frequency'] = 'STP'
                 item['divYield'] = Decimal(0)
                 item['annualAmount'] = Decimal(0)
