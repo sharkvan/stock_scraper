@@ -135,7 +135,9 @@ class SecuritiesPipeline(object):
         exporter = CsvItemExporter(file, encoding='utf8', fields_to_export=('symbol', 'symbolName', 'industry', 'sector', 'frequency', 'eps', 'price', 'divYield', 'exDate', 'amount', 'payDate', 'payQtrMonth', 'change'))
         exporter.start_exporting()
 
-        for stock in self.items.itervalues() :
+        for symbol in sorted(self.items) :
+            stock = self.items[symbol] 
+
             if isinstance(stock['exDate'], datetime):
                 stock['exDate'] = stock['exDate'].date().isoformat()
             
