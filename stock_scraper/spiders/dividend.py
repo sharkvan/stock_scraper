@@ -59,11 +59,11 @@ class DividendSpider(scrapy.Spider):
         # 4. This should help to lower larger jumps in yields dues to abnormal monthly payments.
         nextDivIndex = 0
         for dividend in payDates:
-            exDate = dividend['exDate'].date()
+            exDate = dividend['exDate']
             if exDate <= today :
                 break
 
-            if self.getCalendarQuarter(exDate) == self.getCalendarQuarter(today) :
+            if self.getCalendarQuarter(exDate.date()) == self.getCalendarQuarter(today.date()) :
                 break
 
             nextDivIndex += 1
