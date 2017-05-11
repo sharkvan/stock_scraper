@@ -24,8 +24,8 @@ class DividendSpider(scrapy.Spider):
                                         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36',
                                     })
    
-    def getCalendarQuarter(date) :
-        return (date.month // 3) + 1
+    def getCalendarQuarter(datetime) :
+        return (datetime.date().month // 3) + 1
 
     def parse(self, response):
         
@@ -63,7 +63,7 @@ class DividendSpider(scrapy.Spider):
             if exDate <= today :
                 break
 
-            if self.getCalendarQuarter(exDate.date()) == self.getCalendarQuarter(today.date()) :
+            if self.getCalendarQuarter(exDate) == self.getCalendarQuarter(today) :
                 break
 
             nextDivIndex += 1
