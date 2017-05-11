@@ -24,7 +24,7 @@ class DividendSpider(scrapy.Spider):
                                         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36',
                                     })
    
-    def getCalendarQuarter(datetime) :
+    def getCalendarQuarter(self, datetime) :
         return (datetime.date().month // 3) + 1
 
     def parse(self, response):
