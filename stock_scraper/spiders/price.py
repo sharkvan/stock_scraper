@@ -1,6 +1,8 @@
 import scrapy
 from stock_scraper.items import Price
+from scrapy.loader.processors import TakeFirst
 from decimal import Decimal
+from scrapy.loader import ItemLoader
 
 class PriceSpider(scrapy.Spider):
     name = 'price'
@@ -23,16 +25,20 @@ class PriceSpider(scrapy.Spider):
                                     })
                 
     def parse(self, response):
-        stock = Price() 
-        stock['symbol'] = response.meta['symbol']
+        ld = ItemLoader(item=Price())
+        ld.default_output_processor = TakeFirst()
+
+        ld.add_value('symbol', response.meta['symbol'])
         try:
-            stock['price'] = Decimal(response.css('#qwidget_lastsale::text').extract_first().strip('$'))
+            ld.add_value('price', Decimal(response.css('#qwidget_lastsale::text').extract_first().strip('$')))
         except:
-            stock['price'] = Decimal(0)
+            ld.add_value('price', Decimal(0))
 
         try:
-            stock['change'] = Decimal(response.css('#qwidget_netchange::text').extract_first())
+            ld.add_value('change', Decimal(response.css('#qwidget_netchange::text').extract_first()))
         except:
-            stock['change'] = Decimal(0)
+            ld.add_value('change', Decimal(0))
 
+        stock = ld.load_item()
+        type(stock)
         return stock
