@@ -21,7 +21,7 @@ def json_serial(obj):
     return str(obj)
 
 def getStockFilePath(item, spider):
-    path = os.path.join(spider.folder, item['symbol'].lower() + ".json")
+    path = os.path.join(spider.folder, "results", item['symbol'].lower() + ".json")
     spider.log('reading item from ' + path)
     
     if not os.path.exists(os.path.dirname(path)):
@@ -76,7 +76,7 @@ class LoadStockPipeline(object):
 
 class PricePipeline(object):
     def process_item(self, item, spider):
-        if 'annualAmount' in item :
+        if 'annualAmount' in item and 'price' in item :
             if item['annualAmount'] and item['price'] :
                 item['divYield'] = Decimal(item['annualAmount']) / Decimal(item['price'])
 
@@ -90,7 +90,7 @@ class PayQtrPipeline(object):
     def process_item(self, item, spider):
 
         spider.log(type(item['payDate']))
-        if item['payDate']:
+        if 'payDate' in item and item['payDate']:
             if not type(item['payDate']) is datetime :                
                 payDate = datetime.strptime(item['payDate'], '%Y-%m-%d')
             else:
@@ -138,10 +138,10 @@ class SecuritiesPipeline(object):
         for symbol in sorted(self.items) :
             stock = self.items[symbol] 
 
-            if isinstance(stock['exDate'], datetime):
+            if 'exDate' in stock and isinstance(stock['exDate'], datetime):
                 stock['exDate'] = stock['exDate'].date().isoformat()
             
-            if isinstance(stock['payDate'], datetime):
+            if 'payDate' in stock and isinstance(stock['payDate'], datetime):
                 stock['payDate'] = stock['payDate'].date().isoformat()
             
             exporter.export_item(stock)

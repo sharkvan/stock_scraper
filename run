@@ -1,1 +1,8 @@
-docker run --rm -v /home/tim/projects/stock_scraper:/stock-scraper -w /stock-scraper trcook/docker-scrapy crawl price -a folder=/stock-scraper/results -a symbol='/stock-scraper/symbols'
+docker run \
+        --rm \
+        -v /home/tim/projects/stock_scraper:/stock-scraper \
+        -w /stock-scraper \
+        trcook/docker-scrapy \
+        crawl security \
+        -a folder=/stock-scraper \
+        -a symbol='/stock-scraper/symbols'

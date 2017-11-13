@@ -1,0 +1,9 @@
+#! /bin/bash
+
+docker run --rm \
+    -v /home/tim/projects/stock_scraper:/stock-scraper \
+    -w /stock-scraper \
+    -t \
+    --entrypoint "" \
+    trcook/docker-scrapy \
+    python -m unittest discover -v -s tests/ -p '*.py'

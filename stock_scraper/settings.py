@@ -60,7 +60,7 @@ CONCURRENT_REQUESTS_PER_DOMAIN=4
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'stock_scraper.pipelines.LoadStockPipeline': 0,
+#    'stock_scraper.pipelines.LoadStockPipeline': 0,
     'stock_scraper.pipelines.PricePipeline': 100,
     'stock_scraper.pipelines.PayQtrPipeline': 200,
     'stock_scraper.pipelines.JsonWriterPipeline': 400,

@@ -3,7 +3,8 @@ from scrapy.utils.spider import iterate_spider_output
 from stock_scraper.items import Price, Stock
 from decimal import Decimal
 from stock_scraper.nasdaq.security import Security
-from stock_scraper.nasdaq.response import Response, NasdaqStringQuoteLoader
+from stock_scraper.nasdaq.loaders import NasdaqStringQuoteLoader
+from stock_scraper.nasdaq.response import Response
 
 class PriceSpider(scrapy.Spider):
     name = 'price'
@@ -26,39 +27,19 @@ class PriceSpider(scrapy.Spider):
                                     })
                 
     def parse(self, response):
-        result = self.parse_rows(response)
-        print(type(result))
-        return result
-
-#        items = Response(response.body)
-       
-#        for security in items:
-#            stock = Price() 
-#            stock['symbol'] = security.symbol()
-#            stock['price'] = security.price()
-#            stock['change'] = security.priceChange()
-        
-#            yield stock
+        return self.parse_rows(response)
 
     def adapt_response(self, response):
         return response
 
     def parse_rows(self, response):
-        items = Response(response.body)
-        for row in items:
-            item = iterate_spider_output(self.parse_row(response, row))
-            for item_result in self.process_results(response, item):
-                yield item_result
+        for row in Response(response.body):
+            yield self.parse_row(response, row)
 
     def parse_row(self, response, results):
-        return results
-
-    def process_results(self, response, item):
         loader = NasdaqStringQuoteLoader(
-                item=Price(), 
-                response=response)
-        loader.parse(item)
+                        item=Price())
+        
+        loader.parse(results)
 
-        result = loader.load_item()
-        print(result)
-        return result
+        return loader.load_item()

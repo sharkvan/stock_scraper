@@ -1,0 +1,150 @@
+TODO:
+* Load the initial data into a stock object then load
+    the stock from disk. 
+** Make some tests!!
+* Once the stock object is populated with the current
+value the use the item loader to update it.
+* Test and deploy that update
+* Update the stock object to hold historical price data
+* Update Create a news stock object and log news information
+* 
+
+Good for getting all securities in in a TRBC sector
+https://finance.google.com/finance?catid=TRBC%3A59&start=0&num=10000
+
+Good to get all stocks and aggregate yields for sectors
+http://www.dividend.com/dividend-stocks/financial/
+
+curl 'http://www.dividend.com/dividend-stocks/uncategorized/other/iid-ing-international-high-dividend-equity-income-fund/yieldhistory.json' -H 'Cookie: optimizelyEndUserId=oeu1493581230865r0.950406815906784; modal=1; modal-expire=1493596783103; __qca=P0-1455546839-1493581231248; __gads=ID=1b4fa2a8e7860f06:T=1493581231:S=ALNI_MbE7-g6Nviou5FJ1N-TBtwxRLyU2w; _hjIncludedInSample=1; popup_modal_hide=true; popup_domination_hide_lightbox2=Y; PHPSESSID=hp191jj7ghomrq280cgquilf45; _pk_ref.4.35d2=%5B%22%22%2C%22%22%2C1506202714%2C%22https%3A%2F%2Fwww.google.com%2F%22%5D; __utmt=1; broker=0; bSe=1506204514219; invstr_seg=0; iSe=1506204514222; _pk_id.4.35d2=0b885db21b9be55d.1493581232.5.1506202777.1506202714.; _pk_ses.4.35d2=*; optimizelySegments=%7B%22173969894%22%3A%22false%22%2C%22175048212%22%3A%22search%22%2C%22175049386%22%3A%22gc%22%7D; optimizelyBuckets=%7B%7D; optimizelyPendingLogEvents=%5B%5D; __utma=171588149.1797527334.1493581231.1506055365.1506202714.5; __utmb=171588149.17.8.1506202778128; __utmc=171588149; __utmz=171588149.1506041614.3.3.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)' -H 'DNT: 1' -H 'Accept-Encoding: gzip, deflate' -H 'Accept-Language: en-US,en;q=0.8' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36' -H 'Accept: application/json, text/javascript, */*; q=0.01' -H 'Referer: http://www.dividend.com/dividend-stocks/uncategorized/other/iid-ing-international-high-dividend-equity-income-fund/' -H 'X-Requested-With: XMLHttpRequest' -H 'If-None-Match: W/"2e75d4db44d83c6f3ab784e0d1a45013"' -H 'Connection: keep-alive' --compressed
+curl 'http://www.dividend.com/dividend-stocks/uncategorized/other/iid-ing-international-high-dividend-equity-income-fund/payouthistory.json' -H 'Cookie: optimizelyEndUserId=oeu1493581230865r0.950406815906784; modal=1; modal-expire=1493596783103; __qca=P0-1455546839-1493581231248; __gads=ID=1b4fa2a8e7860f06:T=1493581231:S=ALNI_MbE7-g6Nviou5FJ1N-TBtwxRLyU2w; _hjIncludedInSample=1; popup_modal_hide=true; popup_domination_hide_lightbox2=Y; PHPSESSID=hp191jj7ghomrq280cgquilf45; _pk_ref.4.35d2=%5B%22%22%2C%22%22%2C1506202714%2C%22https%3A%2F%2Fwww.google.com%2F%22%5D; __utmt=1; broker=0; bSe=1506204514219; invstr_seg=0; iSe=1506204514222; _pk_id.4.35d2=0b885db21b9be55d.1493581232.5.1506202777.1506202714.; _pk_ses.4.35d2=*; optimizelySegments=%7B%22173969894%22%3A%22false%22%2C%22175048212%22%3A%22search%22%2C%22175049386%22%3A%22gc%22%7D; optimizelyBuckets=%7B%7D; optimizelyPendingLogEvents=%5B%5D; __utma=171588149.1797527334.1493581231.1506055365.1506202714.5; __utmb=171588149.17.8.1506202778128; __utmc=171588149; __utmz=171588149.1506041614.3.3.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)' -H 'DNT: 1' -H 'Accept-Encoding: gzip, deflate' -H 'Accept-Language: en-US,en;q=0.8' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36' -H 'Accept: application/json, text/javascript, */*; q=0.01' -H 'Referer: http://www.dividend.com/dividend-stocks/uncategorized/other/iid-ing-international-high-dividend-equity-income-fund/' -H 'X-Requested-With: XMLHttpRequest' -H 'If-None-Match: W/"039babca82ebecf6044e15b9fed48822"' -H 'Connection: keep-alive' --compressed
+
+curl http://www.nasdaq.com/quotedll/quote.dll?page=InfoQuotes&mode=stock&symbol=WHLR&selected=WHLR
+
+<*>
+    WHLR|
+    Wheeler Real Estate Investment Trust, Inc.|
+    NASDAQ-CM|
+    |
+    http://www.whlr.us|
+    $&nbsp;10.27|
+    32,531|
+    $&nbsp;10.28|
+    $&nbsp;9.99|
+    N/A|
+    N/A|
+    $&nbsp;15.28|
+    $&nbsp;7.95|
+    NE|
+    8,673|
+    $&nbsp;-1.83|
+    $&nbsp;10.17|
+    $&nbsp;10.29|
+    Aug. 30, 2017|
+    Aug. 30, 2017|
+    $&nbsp;89,071.71|
+    $&nbsp;10.15|
+    0.12|
+    1.18%|
+    up|
+    Common Stock Real Estate Investment Trust|
+    Aug. 30, 2017&nbsp;Market Closed|
+    N|
+    |
+    |
+    N|
+    WHLR|
+    Dec. 31, 1969|
+    |
+    |
+    |
+    |
+    |
+    |
+    Y|
+    17|
+    N|
+    |
+    |
+    |
+    C|
+    10.27|
+    0.12|
+    1.18%|
+    32,531|
+    up|
+    N|
+    $&nbsp;10.28|
+    $&nbsp;9.99|
+    N/A|
+    N/A|
+    N|
+    N|
+    -0.44|
+    13.4 %|
+    0.000000|
+    0.000000|
+    Dec. 31, 1969|
+
+0 - Symbol
+1 - Security Name
+2 - Exchange
+3 - 
+4 - Security Url
+5 - Price
+6 - Volume
+7 - Day High
+8 - Day Low
+9 - 
+10 - 
+11 - 52 wk High
+12 - 52 wk Low
+13 - P/E Ratio
+14 - 
+15 - Earnings Per Share
+16 - Open Price
+17 - Close Price
+18 - Open Price Date
+19 - Close Price Date
+20 - Market Cap
+21 - Previous Close Price
+22 - Price Change
+23 - Percent Price Change
+24 - Price Direction
+25 - Share Type
+26 - 
+27 - 
+28 - 
+29 -
+30 -
+31 - Symbol
+
+46 - Net Change
+
+curl -H "Referer: https://www.barchart.com/stocks/sectors/rankings" -H "Origin: https://www.barchart.com" -H "Accept: application/json" -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36" "https://core-api.barchart.com/v1/quotes/get?fields=symbol%2CsymbolName%2Csectors%2Ceps&symbols=skt"
+
+{
+    "count":1,
+    "total":1,
+    "data":[
+        {   
+            "symbol":"SKT",
+            "symbolName":"Tanger Factory Outlet Centers",
+            "sectors":[
+                {
+                    "symbol":"-679I",
+                    "sectorType":2,
+                    "description":
+                    "SIC-6798 Real Estate Investment Trusts"
+                },{
+                    "symbol":"-ISFO",
+                    "sectorType":4,
+                    "description":"Indices S&P 400"
+                },{
+                    "symbol":"-RETT",
+                    "sectorType":4,
+                    "description":"REIT - Equity Trust Retail"
+                }],
+            "eps":"1.51"
+        }],
+    "errors":null
+}
