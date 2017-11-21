@@ -12,6 +12,7 @@ BOT_NAME = ''
 SPIDER_MODULES = ['stock_scraper.spiders']
 NEWSPIDER_MODULE = 'stock_scraper.spiders'
 
+STORAGE_SERVICE_URI = 'http://172.17.0.1'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
@@ -64,6 +65,7 @@ ITEM_PIPELINES = {
     'stock_scraper.pipelines.PricePipeline': 100,
     'stock_scraper.pipelines.PayQtrPipeline': 200,
     'stock_scraper.pipelines.JsonWriterPipeline': 400,
+    'stock_scraper.pipelines.PostToStorage': 450,
     'stock_scraper.pipelines.SecuritiesPipeline': 500,
 }
 

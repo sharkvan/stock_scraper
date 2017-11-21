@@ -43,3 +43,4 @@ class Nasdaq(scrapy.Request):
         loader.parse(results)
 
         return loader.load_item()
+

@@ -1,5 +1,5 @@
-from stock_scraper.requests.nasdaq import Nasdaq
-from stock_scraper.requests.barchart import Barchart
+from stock_scraper.sources.nasdaq import Nasdaq
+from stock_scraper.sources.barchart import Barchart
 
 def nasdaqSource(symbolConfig):
     return Nasdaq(symbolConfig)

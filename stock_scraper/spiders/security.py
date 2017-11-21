@@ -1,7 +1,7 @@
 import scrapy
 from stock_scraper.config.symbolList import SymbolList
 import json
-from stock_scraper.requests.factory import Factory
+from stock_scraper.sources.factory import Factory
 
 class SecuritySpider(scrapy.Spider):
     name = 'security'

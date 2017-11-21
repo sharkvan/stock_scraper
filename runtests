@@ -5,5 +5,5 @@ docker run --rm \
     -w /stock-scraper \
     -t \
     --entrypoint "" \
-    trcook/docker-scrapy \
+    scrapy \
     python -m unittest discover -v -s tests/ -p '*.py'
