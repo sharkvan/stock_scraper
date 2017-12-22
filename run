@@ -1,9 +1,9 @@
 #! /bin/bash
 docker run \
         --rm \
-        -v /home/tim/projects/stock_scraper:/stock-scraper \
+        -v `pwd`:/stock-scraper \
         -w /stock-scraper \
         scrapy \
         crawl security \
         -a folder=/stock-scraper \
-        -a symbol='/stock-scraper/symbols'
+        -a symbol='/stock-scraper'

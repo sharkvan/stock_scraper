@@ -6,7 +6,7 @@ class SymbolList():
 
     def __init__(self, folder):
         self.folder = folder
-        path = os.path.join(folder, "symbols.json")
+        path = os.path.join(folder, "symbols")
         if os.path.exists(path):
             print "file is there"
 

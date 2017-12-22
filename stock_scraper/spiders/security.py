@@ -7,7 +7,7 @@ class SecuritySpider(scrapy.Spider):
     name = 'security'
 
     def start_requests(self):
-        symbolList = SymbolList(self.folder)
+        symbolList = SymbolList(self.symbol)
         factory = Factory()
 
         for symbolConfig in symbolList:
