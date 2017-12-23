@@ -49,4 +49,5 @@ class Stock(scrapy.Item):
     exDate = scrapy.Field(serializer=friendly_date)
     payDate = scrapy.Field(serializer=friendly_date)
     payQtrMonth = scrapy.Field()
-
+    yearHigh = scrapy.Field()
+    yearLow = scrapy.Field()
