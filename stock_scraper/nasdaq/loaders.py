@@ -9,3 +9,7 @@ class NasdaqStringQuoteLoader(ItemLoader):
         self.add_value('symbol', data['symbol'])
         self.add_value('price', data['price'])
         self.add_value('change', data['priceChange'])
+        self.add_value('symbolName', data['name'])
+        self.add_value('eps', data['earningsPerShare'])
+        self.add_value('yearHigh', data['yearHigh'])
+        self.add_value('yearLow', data['yearLow'])
