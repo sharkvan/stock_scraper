@@ -1,6 +1,6 @@
 import scrapy
-from stock_scraper.config.symbolList import SymbolList
 import json
+from stock_scraper.config.symbolList import SymbolList
 from stock_scraper.sources.factory import Factory
 
 class SecuritySpider(scrapy.Spider):

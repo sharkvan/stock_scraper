@@ -109,13 +109,20 @@ class Security():
         return "|"
 
     def __formatDecimal(self, value):
-        number = value.strip('$').strip('&nbsp;').strip('unch')
+        number = value.strip('$').replace('&nbsp;','').strip('unch').strip('N/A').replace(',','').strip('NE').strip('%')
 
         if number:
             return Decimal(number)
         else:
             return Decimal(0)
 
+    def __priceChange(self, change, direction):
+        
+        if direction == "down":
+            change = change * -1
+
+        return change
+    
     def symbol(self):
         return self.data[0] #0 - Symbol
 
@@ -178,12 +185,7 @@ class Security():
         return self.__formatDecimal(self.data[21]) #21 - Previous Close Price
 
     def priceChange(self):
-        change = self.__formatDecimal(self.data[22]) #22 - Price Change
-        
-        if self.priceDirection() == "down":
-            change = change * -1
-
-        return change
+        return self.__priceChange( self.__formatDecimal(self.data[22]), self.priceDirection()) #22 - Price Change
 
     def percentPriceChange(self):
         return self.__formatDecimal(self.data[23]) #23 - Percent Price Change

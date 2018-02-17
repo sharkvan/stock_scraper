@@ -32,7 +32,7 @@ CONCURRENT_REQUESTS=1
 #COOKIES_ENABLED=False
 
 # Disable Telnet Console (enabled by default)
-#TELNETCONSOLE_ENABLED=False
+TELNETCONSOLE_ENABLED=False
 
 # Override the default request headers:
 #DEFAULT_REQUEST_HEADERS = {
@@ -62,11 +62,11 @@ CONCURRENT_REQUESTS=1
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
 #    'stock_scraper.pipelines.LoadStockPipeline': 0,
-    'stock_scraper.pipelines.PricePipeline': 100,
-    'stock_scraper.pipelines.PayQtrPipeline': 200,
-    'stock_scraper.pipelines.JsonWriterPipeline': 400,
-    'stock_scraper.pipelines.PostToStorage': 450,
-    'stock_scraper.pipelines.SecuritiesPipeline': 500,
+#    'stock_scraper.pipelines.PricePipeline': 100,
+#    'stock_scraper.pipelines.PayQtrPipeline': 200,
+#    'stock_scraper.pipelines.JsonWriterPipeline': 400,
+#    'stock_scraper.pipelines.PostToStorage': 450,
+#    'stock_scraper.pipelines.SecuritiesPipeline': 500,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

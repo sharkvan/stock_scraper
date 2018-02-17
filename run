@@ -4,6 +4,6 @@ docker run \
         -v `pwd`:/stock-scraper \
         -w /stock-scraper \
         scrapy \
-        crawl security \
+        crawl dividend \
         -a folder=/stock-scraper \
         -a symbol='/stock-scraper'

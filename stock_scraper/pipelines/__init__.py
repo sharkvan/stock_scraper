@@ -1,0 +1,7 @@
+from stock_scraper.pipelines.jsonwriterpipeline import JsonWriterPipeline
+from stock_scraper.pipelines.loadstockpipeline import LoadStockPipeline
+from stock_scraper.pipelines.payqtrpipeline import PayQtrPipeline
+from stock_scraper.pipelines.posttostorage import PostToStorage
+from stock_scraper.pipelines.securitiespipeline import SecuritiesPipeline
+from stock_scraper.pipelines.pricepipeline import PricePipeline
+

@@ -1,0 +1,58 @@
+{
+    "yearLow": "5.1701",
+    "symbol": "TICC",
+    "eps": "1.17",
+    "yearHigh": "8.19",
+    "price": "5.61",
+    "change": "0",
+    "symbolName": "TICC Capital Corp.",
+    "industry":"",
+    "sector":"",
+    "price":{
+        "latest":{
+            "date":"",
+            "open":"",
+            "high":"",
+            "low":"",
+            "close":"",
+            "change":""
+        },
+        "eps":"",
+        "history":[
+            {
+                "date":"",
+                "open":"",
+                "high":"",
+                "low":"",
+                "close":"",
+                "change":""
+            }
+        ]
+    },
+    "dividend":{
+        "frequency":"",
+        "divYield":"",
+        "annual-amount-ytd":"",
+        "annual-amount-projected":"",
+        "next": {
+            "ex-date":"",
+            "type":"",
+            "cash-amount":"",
+            "declaration-date":"",
+            "record-date":"",
+            "payment-date":"",
+            "pay-qtr-month":""
+        },
+        "history":[
+            {
+                "ex-date":"3/29/2018",
+                "type":"Cash",
+                "cash-Amount":"0.083",
+                "declaration-date":"11/2/2017",
+                "record-date":"3/30/2018",
+                "payment-date":"4/16/2018",
+                "pay-qtr-month":""
+            }
+        ]
+    }
+}

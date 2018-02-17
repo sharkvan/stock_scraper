@@ -23,7 +23,7 @@ class Response():
             item = self.__items[self.current]
 
             self.current += 1
-            return self.__getItemDict(item)
+            return Security(item)
         else:
             raise StopIteration
 
