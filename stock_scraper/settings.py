@@ -65,7 +65,7 @@ ITEM_PIPELINES = {
 #    'stock_scraper.pipelines.PricePipeline': 100,
 #    'stock_scraper.pipelines.PayQtrPipeline': 200,
 #    'stock_scraper.pipelines.JsonWriterPipeline': 400,
-#    'stock_scraper.pipelines.PostToStorage': 450,
+    'stock_scraper.pipelines.PostToStorage': 450,
 #    'stock_scraper.pipelines.SecuritiesPipeline': 500,
 }
 
