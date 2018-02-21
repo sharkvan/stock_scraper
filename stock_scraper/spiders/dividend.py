@@ -2,7 +2,7 @@ import scrapy
 from decimal import Decimal
 from datetime import datetime
 from scrapy.exceptions import DropItem
-from stock_scraper.items import Dividend
+from stock_scraper.items import Dividend, Dividends, Payment
 from stock_scraper.config.symbolList import SymbolList
 from stock_scraper.utils.files import getStock
 
@@ -39,25 +39,43 @@ class DividendSpider(scrapy.Spider):
         #payDates = []
         #today = datetime.now()
 
+       # {symbol:"ticc",
+       #  dividends: {
+       #      "12/29/2017": {
+       #             payDate:
+       #             exDate:
+       #             recDate:
+       #             decDate:
+       #             amount:
+       #         }
+       #      }
+       #  }
 
         config = response.meta['symbol']
-
         for record in grid.css('tr'):
             if record.css('td span::text') :
-                try:
+                #try:
                     dividend = Dividend() 
-                    dividend['exDate'] = datetime.strptime(record.css('td span::text')[0].extract(), '%m/%d/%Y')
-                    dividend['payDate'] = datetime.strptime(record.css('td span::text')[4].extract(), '%m/%d/%Y')
-                    dividend['amount'] = Decimal(record.css('td span::text')[1].extract())
                     dividend['symbol'] = config.symbol()
+                    
+                    payment = Payment()
+                    payment['exDate'] = datetime.strptime(record.css('td span::text')[0].extract(), '%m/%d/%Y')
+                    payment['payDate'] = datetime.strptime(record.css('td span::text')[4].extract(), '%m/%d/%Y')
+                    payment['amount'] = Decimal(record.css('td span::text')[1].extract())
+
+                    dividends = {}
+                    dividends[payment['payDate'].strftime("%Y-%m-%d")] = payment
+
+                    dividend['dividends'] = dividends
 
                     yield dividend
 
                 #    payDates.append(dividend)
                 #    if (dividend['payDate'] - today).days >= 365:
                 #        break
-                except:
-                    continue
+                #except:
+                #    print "Oh! error"
+                #    continue
 
 #        if payDates.count == 0:
 #            return None 
