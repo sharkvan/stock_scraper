@@ -39,8 +39,6 @@ class ProfileSpider(scrapy.Spider):
         profile = Profile()
 
         profile['symbol'] = config.symbol()
-        profile['symbolName'] = stock['symbolName']
-        profile['symbolName'] = symbolData['symbolName']
         
         try:
             profile['eps'] = Decimal(stock['eps'])
