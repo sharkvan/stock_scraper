@@ -1,5 +1,6 @@
 import scrapy
 import json
+import time
 from stock_scraper.items import Profile
 from decimal import Decimal
 from stock_scraper.config.symbolList import SymbolList
@@ -19,6 +20,7 @@ class ProfileSpider(scrapy.Spider):
         symbolList = SymbolList(self.symbol)
 
         for symbolConfig in symbolList:
+            time.sleep(0.200)
             yield scrapy.Request(
                     url = 'https://core-api.barchart.com/v1/quotes/get?fields=symbol%2CsymbolName%2Csectors%2Ceps&symbols=' + symbolConfig.symbol(),
                     meta = {'symbol': symbolConfig},
