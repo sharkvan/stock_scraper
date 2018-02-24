@@ -20,7 +20,7 @@ class ProfileSpider(scrapy.Spider):
         symbolList = SymbolList(self.symbol)
 
         for symbolConfig in symbolList:
-            time.sleep(0.200)
+            time.sleep(0.500)
             yield scrapy.Request(
                     url = 'https://core-api.barchart.com/v1/quotes/get?fields=symbol%2CsymbolName%2Csectors%2Ceps&symbols=' + symbolConfig.symbol(),
                     meta = {'symbol': symbolConfig},
@@ -49,9 +49,14 @@ class ProfileSpider(scrapy.Spider):
             profile['eps'] = Decimal(0)
 
         if len(symbolData['sectors']) > 0:
-            profile['industry'] = stock['industry']
+            if 'industry' in stock:
+                profile['industry'] = stock['industry']
+            
             profile['industry'] = symbolData['sectors'][1]['description']
-            profile['sector'] = stock['sector']
+            
+            if 'sector' in stock:
+                profile['sector'] = stock['sector']
+            
             profile['sector'] = symbolData['sectors'][0]['description']
 
         return profile
