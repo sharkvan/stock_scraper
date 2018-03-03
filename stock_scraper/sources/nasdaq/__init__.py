@@ -13,11 +13,10 @@ class Nasdaq(scrapy.Request):
                     callback = self.parse,
                     meta = {'config': symbolConfig},
                     headers = {
-                        'Accept-Encoding': 'gzip, deflate',
+                        'Accept-Encoding': 'gzip, deflate, br',
+                        'Accept-Language': 'en-US,en;q=0.9',
                         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-                        'Host': 'www.nasdaq.com',
-                        'Referer': 'https://www.nasdaq.com/',
-                        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36',
+                        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36',
                     })
 
     def parse(self, response):
