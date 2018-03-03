@@ -9,7 +9,7 @@ class Nasdaq(scrapy.Request):
 
     def __init__(self, symbolConfig):
         super(Nasdaq, self).__init__(
-                    url = 'http://www.nasdaq.com/quotedll/quote.dll?page=InfoQuotes&mode=stock&symbol=' + symbolConfig.symbol().lower(), 
+                    url = 'https://www.nasdaq.com/quotedll/quote.dll?page=InfoQuotes&mode=stock&symbol=' + symbolConfig.symbol().lower(), 
                     callback = self.parse,
                     meta = {'config': symbolConfig},
                     headers = {
