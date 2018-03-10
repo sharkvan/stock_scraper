@@ -7,3 +7,19 @@ docker run \
         crawl security \
         -a folder=/stock-scraper \
         -a symbol='/stock-scraper'
+docker run \
+        --rm \
+        -v `pwd`:/stock-scraper \
+        -w /stock-scraper \
+        scrapy \
+        crawl dividend \
+        -a folder=/stock-scraper \
+        -a symbol='/stock-scraper'
+docker run \
+        --rm \
+        -v `pwd`:/stock-scraper \
+        -w /stock-scraper \
+        scrapy \
+        crawl profile \
+        -a folder=/stock-scraper \
+        -a symbol='/stock-scraper'
