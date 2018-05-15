@@ -15,7 +15,6 @@ class PriceSpider(scrapy.Spider):
             for symbol in symbols:
                 symbol = symbol.strip()
                 if not symbol: continue
-                thread.sleep(1000)
                 yield scrapy.Request( url = 'http://www.nasdaq.com/quotedll/quote.dll?page=InfoQuotes&mode=stock&symbol=' + symbol.lower(), 
                                       callback = self.parse,
                                       meta = {'symbol': symbol},
