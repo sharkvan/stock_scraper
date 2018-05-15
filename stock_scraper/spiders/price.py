@@ -15,6 +15,7 @@ class PriceSpider(scrapy.Spider):
             for symbol in symbols:
                 symbol = symbol.strip()
                 if not symbol: continue
+                thread.sleep(1000)
                 yield scrapy.Request( url = 'http://www.nasdaq.com/quotedll/quote.dll?page=InfoQuotes&mode=stock&symbol=' + symbol.lower(), 
                                       callback = self.parse,
                                       meta = {'symbol': symbol},
@@ -26,7 +27,6 @@ class PriceSpider(scrapy.Spider):
                                         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36',
                                     })
 
-                thread.sleep(1000)
                 
     def parse(self, response):
         return self.parse_rows(response)
